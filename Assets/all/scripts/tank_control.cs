@@ -16,7 +16,9 @@ public class tank_control : MonoBehaviour
     public Rigidbody rigid;
     public GameObject shell;
     public Transform shell_pos;
-    public float shell_speed;
+    public float shell_speed_min, shell_speed_max,shell_speed_current;
+    public float shell_speed_add;
+    bool isFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,12 +44,34 @@ public class tank_control : MonoBehaviour
         transform.Rotate(Vector3.up, horizontal*rotate_speed*Time.deltaTime);
        if(Input.GetButtonDown(fireStr))
         {
-            openFire();
+            isFire = true;
+            shell_speed_current = shell_speed_min;
+        }
+       if(Input.GetButton(fireStr))
+        {
+            shell_speed_current += shell_speed_add * Time.deltaTime;
+            if(shell_speed_current>=shell_speed_max)
+            {
+                shell_speed_current = shell_speed_max;
+                if(isFire)
+                {
+                    openFire(shell_speed_current);
+                    isFire = false;
+                }
+            }
+        }
+        if(Input.GetButtonUp(fireStr))
+        {
+            if(isFire)
+            {
+                openFire(shell_speed_current);
+                isFire = false;
+            }
         }
     
     }
 
-    void openFire()
+    void openFire(float shell_speed)
     {
         GameObject shell_fire = Instantiate(shell, shell_pos.position, shell_pos.rotation);
         Rigidbody shell_fire_rigid = shell_fire.GetComponent<Rigidbody>();
