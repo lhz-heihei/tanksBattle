@@ -24,6 +24,7 @@ public class tank_control : MonoBehaviour
     bool isFire;
     public float PH;
     public UnityEngine.UI.Slider phSlider;
+    public ParticleSystem tank_explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,7 +95,10 @@ public class tank_control : MonoBehaviour
         phSlider.value = PH;
         if(PH<=0)
         {
-
+            tank_explosion.gameObject.transform.parent = null;
+            tank_explosion.Play();
+            Destroy(tank_explosion, tank_explosion.main.duration);
+            Destroy(this.gameObject);
         }
     }
 }
