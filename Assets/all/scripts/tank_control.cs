@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class tank_control : MonoBehaviour
 {
@@ -16,9 +18,12 @@ public class tank_control : MonoBehaviour
     public Rigidbody rigid;
     public GameObject shell;
     public Transform shell_pos;
-    public float shell_speed_min, shell_speed_max,shell_speed_current;
+    public float shell_speed_min, shell_speed_max;
+    private float shell_speed_current;
     public float shell_speed_add;
     bool isFire;
+    public float PH;
+    public UnityEngine.UI.Slider phSlider;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,8 @@ public class tank_control : MonoBehaviour
         horizontalStr = horizontalStr + (int)tank_type;
         verticalStr = verticalStr + (int)tank_type;
         fireStr = fireStr + (int)tank_type;
+        phSlider.maxValue = PH;
+        phSlider.value = PH;
     }
 
     // Update is called once per frame
@@ -78,6 +85,16 @@ public class tank_control : MonoBehaviour
         if(shell_fire_rigid!=null)
         {
             shell_fire_rigid.velocity = shell_pos.forward * shell_speed;
+        }
+    }
+
+    public void ShellDamage(float damage)
+    {
+        PH -= damage;
+        phSlider.value = PH;
+        if(PH<=0)
+        {
+
         }
     }
 }
