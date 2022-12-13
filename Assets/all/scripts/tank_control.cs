@@ -28,6 +28,11 @@ public class tank_control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TankInitialization();
+    }
+
+    public void TankInitialization()
+    {
         rigid = GetComponent<Rigidbody>();
         horizontalStr = "Horizontal";
         verticalStr = "Vertical";
