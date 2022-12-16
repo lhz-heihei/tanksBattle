@@ -35,7 +35,9 @@ public class camera_control : MonoBehaviour
             }
             targetCameraPos = sumPos / tanks.Length;
             targetCameraPos.y = mainCamera.transform.position.y;
-            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetCameraPos, ref currentVelocity, smoothTime);
+            Vector3 targetCameraPos1 = targetCameraPos;
+            targetCameraPos1.z -= 30;        //相机有所旋转，则位置与两坦克中心位置有些偏移
+            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetCameraPos1, ref currentVelocity, smoothTime);
         }
     }
 
