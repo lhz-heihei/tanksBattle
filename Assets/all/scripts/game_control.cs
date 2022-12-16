@@ -8,11 +8,15 @@ public class game_control : MonoBehaviour
     public GameObject tankPrefab;
     public Color tankOneColor, tankTwoColor;
     public camera_control cameraControl;
+    
     // Start is called before the first frame update
+   
+
     void Start()
     {
         TankInstantiate();
         cameraControl.tanks=GameObject.FindGameObjectsWithTag("Player");
+        audio_manager.audioManager.bgm_play();
     }
 
     // Update is called once per frame

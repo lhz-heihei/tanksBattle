@@ -25,10 +25,12 @@ public class tank_control : MonoBehaviour
     public float PH;
     public UnityEngine.UI.Slider phSlider;
     public ParticleSystem tank_explosion;
+    
     // Start is called before the first frame update
     void Start()
     {
         TankInitialization();
+      
     }
 
     public void TankInitialization()
@@ -69,6 +71,7 @@ public class tank_control : MonoBehaviour
                 if(isFire)
                 {
                     openFire(shell_speed_current);
+                   
                     isFire = false;
                 }
             }
@@ -92,6 +95,7 @@ public class tank_control : MonoBehaviour
         {
             shell_fire_rigid.velocity = shell_pos.forward * shell_speed;
         }
+        audio_manager.audioManager.Fire_play();
     }
 
     public void ShellDamage(float damage)
@@ -102,6 +106,7 @@ public class tank_control : MonoBehaviour
         {
             tank_explosion.gameObject.transform.parent = null;
             tank_explosion.Play();
+            audio_manager.audioManager.tankExplosion_play();
             Destroy(tank_explosion, tank_explosion.main.duration);
             Destroy(this.gameObject);
         }

@@ -41,6 +41,7 @@ public class shell_control : MonoBehaviour
         if (shell_explosion)
         {
             shell_explosion.Play();
+            audio_manager.audioManager.shellExplosion_play();
             Destroy(shell_explosion.gameObject, shell_explosion.main.duration);
         }
         Destroy(this.gameObject);
