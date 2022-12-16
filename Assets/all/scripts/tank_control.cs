@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class tank_control : MonoBehaviour
 {
@@ -108,7 +109,14 @@ public class tank_control : MonoBehaviour
             tank_explosion.Play();
             audio_manager.audioManager.tankExplosion_play();
             Destroy(tank_explosion, tank_explosion.main.duration);
-            Destroy(this.gameObject);
+            //   Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            Invoke("ReloadScene", 3);
         }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }
